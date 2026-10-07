@@ -1,0 +1,9 @@
+{
+  "name": "xv-renata-leon",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Invitación digital XV años Renata León",
+  "scripts": {
+    "dev": "node server.js"
+  }
+}
