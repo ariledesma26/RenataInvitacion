@@ -17,6 +17,7 @@ const TYPES = {
   '.webp': 'image/webp',
   '.ico': 'image/x-icon',
   '.mp3': 'audio/mpeg',
+  '.mpeg': 'audio/mpeg',
   '.woff2': 'font/woff2',
 };
 

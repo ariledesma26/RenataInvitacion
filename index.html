@@ -244,6 +244,44 @@
     position: relative; max-width: 440px; margin: 0 auto;
     padding: max(48px, env(safe-area-inset-top)) 24px 64px; text-align: center;
   }
+  /* ---------- Portada inicial de la invitación ---------- */
+  .cover-section {
+    min-height: calc(100vh - max(48px, env(safe-area-inset-top)));
+    min-height: calc(100dvh - max(48px, env(safe-area-inset-top)));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+  }
+  .scroll-hint {
+    margin-top: auto;
+    padding-top: 24px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    font-size: 10px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--gray-soft);
+    animation: hintFloat 2.4s ease-in-out infinite;
+  }
+  .scroll-hint svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--wine);
+    stroke-width: 1.5;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  @keyframes hintFloat {
+    0%, 100% { transform: translateY(0); opacity: .55; }
+    50% { transform: translateY(4px); opacity: .95; }
+  }
   .sheet .mis { font-size: clamp(50px, 15vw, 70px); }
   .sheet .name { font-size: clamp(42px, 12.5vw, 58px); }
   .quote {
@@ -269,6 +307,27 @@
   .countdown span { font-size: 10.5px; letter-spacing: .22em; color: var(--gray); text-transform: uppercase; }
 
   .section-title { font-family: "Great Vibes", cursive; font-size: 40px; color: #3b3735; margin: 48px 0 8px; font-weight: 400; }
+  .quote + .section-title { margin-top: 28px; }
+  /* ---------- Papás y Padrinos ---------- */
+  .family-card {
+    margin: 16px auto 0; padding: 26px 20px 24px; max-width: 360px; border-radius: 16px;
+    background: rgba(255,255,255,.6); border: 1px solid rgba(160,140,110,.25);
+    box-shadow: 0 10px 30px rgba(90,40,30,.07);
+  }
+  .family-group h4 {
+    font-weight: 500; font-size: 13px; letter-spacing: .32em; text-transform: uppercase;
+    color: var(--wine);
+  }
+  .family-group p {
+    margin-top: 8px; font-size: 20px; line-height: 1.35; color: var(--ink);
+  }
+  .family-sep {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    margin: 18px auto 16px; color: var(--gray-soft);
+  }
+  .family-sep i { display: block; width: 42px; height: 1px; background: currentColor; opacity: .5; }
+  .family-sep svg { width: 14px; height: 14px; }
+
   .place {
     margin: 16px auto 0; padding: 26px 20px 22px; max-width: 360px; border-radius: 16px;
     background: rgba(255,255,255,.6); border: 1px solid rgba(160,140,110,.25);
@@ -277,7 +336,14 @@
   .place .icon { width: 34px; height: 34px; color: var(--wine); margin: 0 auto 8px; }
   .place h3 { font-weight: 500; font-size: 13px; letter-spacing: .32em; text-transform: uppercase; color: var(--wine); }
   .place p { margin-top: 8px; font-size: 19px; line-height: 1.35; color: var(--ink); }
-  .place small { display: block; margin-top: 4px; font-size: 14px; color: var(--gray); letter-spacing: .06em; }
+  .place .time {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    margin-top: 8px; padding: 4px 14px; border-radius: 999px;
+    background: rgba(128,0,32,.07); border: 1px solid rgba(128,0,32,.18);
+    font-size: 14.5px; font-weight: 500; letter-spacing: .06em; color: var(--wine);
+  }
+  .place .time svg { width: 14px; height: 14px; }
+  .place small { display: block; margin-top: 6px; font-size: 14px; color: var(--gray); letter-spacing: .06em; }
   .btn {
     display: inline-flex; align-items: center; gap: 8px; margin-top: 16px;
     padding: 10px 22px; border-radius: 999px; text-decoration: none;
@@ -328,45 +394,77 @@
 
   /* ---------- Confirmación (RSVP) ---------- */
   .rsvp {
-    margin: 18px auto 0; max-width: 360px; padding: 26px 18px 24px; text-align: left;
+    margin: 18px auto 0; max-width: 360px; padding: 26px 20px 24px; text-align: center;
     border-radius: 16px; background: rgba(255,255,255,.62);
     border: 1px solid rgba(160,140,110,.25); box-shadow: 0 10px 30px rgba(90,40,30,.07);
   }
   .rsvp-intro { text-align: center; font-style: italic; font-size: 17px; color: #55504b; margin-bottom: 18px; }
-  .field { margin-bottom: 14px; border: 0; }
-  .field > label {
-    display: block; margin-bottom: 7px; padding: 0;
-    font-size: 11.5px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; color: var(--wine);
-  }
-  .rsvp input[type="text"], .rsvp select {
-    width: 100%; height: 46px; padding: 0 14px; border-radius: 10px;
-    border: 1px solid rgba(128,0,32,.2); background-color: rgba(255,255,255,.85);
-    font: 400 18px/1 "Cormorant Garamond", serif; color: var(--ink);
-    transition: border-color .2s, box-shadow .2s;
-    -webkit-appearance: none; appearance: none;
-  }
-  .rsvp select {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%23800020' stroke-width='1.4'/></svg>");
-    background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px;
-  }
-  .rsvp input[type="text"]::placeholder { color: #b1aaa2; }
-  .rsvp input[type="text"]:focus, .rsvp select:focus { outline: none; border-color: var(--wine); box-shadow: 0 0 0 3px rgba(128,0,32,.12); }
-  .rsvp .invalid { border-color: #b3261e !important; box-shadow: 0 0 0 3px rgba(179,38,30,.12) !important; }
-  .rsvp select:invalid { color: #b1aaa2; }
-  .rsvp select option { color: var(--ink); }
-  .err { display: none; margin: -6px 0 12px; font-size: 14px; color: #b3261e; text-align: center; }
-  .err.on { display: block; }
   .wa-btn {
-    width: 100%; justify-content: center; min-height: 58px; height: auto; padding: 12px 16px; margin-top: 4px;
-    font-size: 13px; line-height: 1.3; letter-spacing: .1em; font-weight: 600; gap: 10px; text-align: center;
+    width: 100%; justify-content: center; min-height: 56px; height: auto; padding: 14px 18px; margin-top: 4px;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.25;
+    letter-spacing: .02em;
+    text-transform: none;
+    font-weight: 500;
+    gap: 10px; text-align: center;
   }
   .wa-btn svg { width: 24px; height: 24px; flex: none; }
-  .rsvp-note { margin-top: 10px; text-align: center; font-size: 13px; color: var(--gray); }
+  .rsvp-note { margin-top: 12px; text-align: center; font-size: 13px; color: var(--gray); }
 
   .closing { margin-top: 44px; font-style: italic; font-size: 18px; color: #55504b; }
   .closing + .name { font-size: 40px; margin-top: 2px; }
   .back { margin-top: 30px; }
   .sprig-divider { width: 120px; margin: 40px auto 0; opacity: .75; display: block; }
+
+  /* ---------- Control de música de fondo ---------- */
+  .music-toggle {
+    position: fixed;
+    top: max(16px, env(safe-area-inset-top));
+    right: max(16px, env(safe-area-inset-right));
+    z-index: 50;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, .82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(160, 140, 110, .3);
+    color: var(--wine);
+    box-shadow: 0 4px 16px rgba(90, 40, 30, .14);
+    cursor: pointer;
+    transition: transform .25s var(--ease-out), background .25s, box-shadow .25s;
+    outline: none;
+  }
+  .music-toggle:hover {
+    transform: scale(1.08);
+    background: rgba(255, 255, 255, .95);
+    box-shadow: 0 6px 20px rgba(90, 40, 30, .2);
+  }
+  .music-toggle:focus-visible {
+    outline: 2px solid var(--wine);
+    outline-offset: 3px;
+  }
+  .music-toggle svg {
+    width: 20px;
+    height: 20px;
+  }
+  .music-toggle.playing svg.icon-playing {
+    display: block;
+    animation: musicSpin 4.5s linear infinite;
+  }
+  .music-toggle.playing svg.icon-paused { display: none; }
+  .music-toggle:not(.playing) svg.icon-playing { display: none; }
+  .music-toggle:not(.playing) svg.icon-paused { display: block; opacity: .65; }
+
+  @keyframes musicSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
 
   .reveal { opacity: 0; transform: translateY(18px); transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); }
   .reveal.in { opacity: 1; transform: none; }
@@ -492,6 +590,20 @@
 <div class="flora ml" aria-hidden="true"><svg viewBox="0 0 120 300"><use href="#stems"/></svg></div>
 <div class="flora mr" aria-hidden="true"><svg viewBox="0 0 120 300"><use href="#stems"/></svg></div>
 
+<!-- Música de fondo -->
+<audio id="bg-music" preload="auto" loop playsinline>
+  <source src="taylor.mpeg" type="audio/mpeg">
+</audio>
+
+<button class="music-toggle" id="music-toggle" type="button" aria-label="Reproducir o pausar música de fondo" title="Música">
+  <svg class="icon-playing" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+  </svg>
+  <svg class="icon-paused" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/><line x1="2" y1="2" x2="22" y2="22"/>
+  </svg>
+</button>
+
 <!-- ============ FASE 1: SOBRE ============ -->
 <main class="stage" id="stage">
   <header class="hero">
@@ -556,26 +668,52 @@
 <!-- ============ INVITACIÓN INTERNA ============ -->
 <section class="invite" id="invite" aria-hidden="true">
   <div class="sheet">
-    <div class="reveal">
-      <h2 class="mis">Mis XV Años</h2>
-      <p class="name">Renata León</p>
-      <div class="rule" aria-hidden="true"><i></i><svg viewBox="0 0 120 120"><use href="#orchid"/></svg><i></i></div>
+    <div class="cover-section">
+      <div class="reveal">
+        <h2 class="mis">Mis XV Años</h2>
+        <p class="name">Renata León</p>
+        <div class="rule" aria-hidden="true"><i></i><svg viewBox="0 0 120 120"><use href="#orchid"/></svg><i></i></div>
+      </div>
+
+      <p class="quote reveal">Hay momentos que se guardan para siempre en el corazón. Me encantaría que fueras parte de este día tan especial.</p>
+
+      <div class="bigdate reveal" aria-label="Sábado 6 de febrero de 2027">
+        <span class="side">Sábado</span>
+        <span class="day">06</span>
+        <span class="side">Febrero</span>
+        <span class="year">2027</span>
+      </div>
+
+      <div class="countdown reveal" id="countdown" aria-live="off">
+        <div><strong data-cd="d">00</strong><span>Días</span></div>
+        <div><strong data-cd="h">00</strong><span>Hrs</span></div>
+        <div><strong data-cd="m">00</strong><span>Min</span></div>
+        <div><strong data-cd="s">00</strong><span>Seg</span></div>
+      </div>
+
+      <div class="scroll-hint reveal" aria-hidden="true">
+        <span>Desliza</span>
+        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5"/></svg>
+      </div>
     </div>
 
-    <p class="quote reveal">Hay momentos que se guardan para siempre en el corazón. Me encantaría que fueras parte de este día tan especial.</p>
+    <svg class="sprig-divider reveal" viewBox="0 0 200 40" aria-hidden="true"><use href="#sprig"/></svg>
 
-    <div class="bigdate reveal" aria-label="Sábado 6 de febrero de 2027">
-      <span class="side">Sábado</span>
-      <span class="day">06</span>
-      <span class="side">Febrero</span>
-      <span class="year">2027</span>
-    </div>
+    <p class="quote reveal">Con la bendición de Dios, el amor incondicional de mis padres y el cariño de mis padrinos, inicio una de las etapas más bellas de mi vida.</p>
 
-    <div class="countdown reveal" id="countdown" aria-live="off">
-      <div><strong data-cd="d">00</strong><span>Días</span></div>
-      <div><strong data-cd="h">00</strong><span>Hrs</span></div>
-      <div><strong data-cd="m">00</strong><span>Min</span></div>
-      <div><strong data-cd="s">00</strong><span>Seg</span></div>
+    <h3 class="section-title reveal">Papás y Padrinos</h3>
+    <div class="family-card reveal">
+      <div class="family-group">
+        <h4>Papás</h4>
+        <p>Guadalupe Segura y Jesús León</p>
+      </div>
+      <div class="family-sep" aria-hidden="true">
+        <i></i><svg viewBox="0 0 120 120"><use href="#orchid"/></svg><i></i>
+      </div>
+      <div class="family-group">
+        <h4>Padrinos</h4>
+        <p>Ivonee Trejo y David Álvarez</p>
+      </div>
     </div>
 
     <svg class="sprig-divider" viewBox="0 0 200 40" aria-hidden="true"><use href="#sprig"/></svg>
@@ -587,6 +725,10 @@
       </svg>
       <h3>Templo</h3>
       <p>Templo de Santo Domingo de Guzmán</p>
+      <div class="time">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 6 12 12 15 14"/></svg>
+        <span>5:30 p.m.</span>
+      </div>
       <small>Querétaro, Qro.</small>
       <a class="btn-map" target="_blank" rel="noopener" href="https://maps.app.goo.gl/KwnohPyPALxdHmpj6">VER UBICACIÓN EN MAPS <span aria-hidden="true">📍</span></a>
     </div>
@@ -659,29 +801,15 @@
     </section>
 
     <h3 class="section-title reveal">Confirma tu asistencia</h3>
-    <form class="rsvp reveal" id="rsvp" novalidate>
+    <div class="rsvp reveal">
       <p class="rsvp-intro">Tu presencia hará este día aún más especial.</p>
 
-      <div class="field">
-        <input type="text" id="rsvp-name" name="nombre" autocomplete="name" placeholder="Nombre de los invitados" aria-label="Nombre de los invitados" required>
-      </div>
-
-      <div class="field">
-        <select id="rsvp-seats" name="asistentes" aria-label="¿Cuántos asisten?" required>
-          <option value="" disabled selected>¿Cuántos asisten?</option>
-          <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
-          <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
-        </select>
-      </div>
-
-      <p class="err" id="rsvp-err" role="alert"></p>
-
-      <button class="btn wa-btn" type="submit">
+      <a class="btn wa-btn" id="wa-btn" target="_blank" rel="noopener" href="https://wa.me/524427246228?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20para%20los%20XV%20de%20Renata%20Le%C3%B3n%20el%2006%20de%20Febrero%202027.%20%C2%A1Ah%C3%AD%20nos%20vemos!">
         <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 3C8.9 3 3.1 8.78 3.1 15.9c0 2.27.6 4.49 1.73 6.44L3 29l6.83-1.79a12.9 12.9 0 0 0 6.2 1.58h.01c7.13 0 12.93-5.78 12.93-12.9C28.97 8.78 23.17 3 16.04 3Zm0 23.6h-.01a10.7 10.7 0 0 1-5.46-1.5l-.39-.23-4.05 1.06 1.08-3.94-.26-.4a10.66 10.66 0 0 1-1.64-5.7c0-5.9 4.82-10.7 10.74-10.7 5.92 0 10.73 4.8 10.73 10.7 0 5.9-4.82 10.7-10.74 10.7Zm5.89-8.01c-.32-.16-1.91-.94-2.2-1.05-.3-.1-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.37.24-.7.08-.32-.16-1.36-.5-2.59-1.6-.96-.85-1.6-1.9-1.79-2.22-.19-.32-.02-.5.14-.66.14-.14.32-.37.48-.56.16-.18.21-.32.32-.53.1-.21.05-.4-.03-.56-.08-.16-.72-1.74-1-2.38-.26-.62-.53-.54-.72-.55h-.62c-.21 0-.56.08-.85.4-.3.32-1.12 1.09-1.12 2.66 0 1.57 1.15 3.09 1.3 3.3.17.21 2.26 3.44 5.47 4.83.77.33 1.36.52 1.83.67.77.24 1.47.21 2.02.13.62-.09 1.91-.78 2.18-1.53.27-.75.27-1.4.19-1.53-.08-.13-.3-.21-.62-.37Z"/></svg>
-        <span>CONFIRMAR ASISTENCIA POR WHATSAPP <span aria-hidden="true">💬</span></span>
-      </button>
+        <span>Confirmar asistencia por WhatsApp</span>
+      </a>
       <p class="rsvp-note">Se abrirá WhatsApp con tu mensaje listo para enviar.</p>
-    </form>
+    </div>
 
     <p class="closing reveal">Con todo mi cariño,</p>
     <p class="name reveal">Renata</p>
@@ -705,9 +833,53 @@
   let busy = false, timers = [];
   const at = (ms, fn) => timers.push(setTimeout(fn, ms * k));
 
+  // Música de fondo
+  const bgMusic = document.getElementById('bg-music');
+  const musicToggle = document.getElementById('music-toggle');
+
+  function updateMusicUI(playing) {
+    if (!musicToggle) return;
+    musicToggle.classList.toggle('playing', playing);
+    musicToggle.setAttribute('aria-label', playing ? 'Pausar música de fondo' : 'Reproducir música de fondo');
+  }
+
+  function startMusic() {
+    if (!bgMusic) return;
+    bgMusic.volume = 0.65;
+    const p = bgMusic.play();
+    if (p !== undefined) {
+      p.then(() => updateMusicUI(true)).catch(() => updateMusicUI(false));
+    }
+  }
+
+  function pauseMusic() {
+    if (!bgMusic) return;
+    bgMusic.pause();
+    updateMusicUI(false);
+  }
+
+  function toggleMusic() {
+    if (!bgMusic) return;
+    if (bgMusic.paused) startMusic();
+    else pauseMusic();
+  }
+
+  if (musicToggle) {
+    musicToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMusic();
+    });
+  }
+
+  if (bgMusic) {
+    bgMusic.addEventListener('play', () => updateMusicUI(true));
+    bgMusic.addEventListener('pause', () => updateMusicUI(false));
+  }
+
   function open() {
     if (busy) return;
     busy = true;
+    startMusic();
     stage.classList.add('opening');                       // lacre: destello y desvanecido
     at(350,  () => stage.classList.add('flap-up'));       // la solapa gira 180° sobre la bisagra (0.8s)
     at(750,  () => stage.classList.add('flap-behind'));   // a la mitad del giro pasa detrás de la carta
@@ -745,42 +917,21 @@
     io = new IntersectionObserver(entries => entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
     }), { root: invite, threshold: .15 });
-    items.forEach((el, i) => { el.style.transitionDelay = (i < 4 ? i * 120 : 0) + 'ms'; io.observe(el); });
+    items.forEach((el, i) => { el.style.transitionDelay = (i < 5 ? i * 120 : 0) + 'ms'; io.observe(el); });
   }
 
   // Confirmación por WhatsApp
   const WHATSAPP_NUMBER = '524427246228'; // 52 (México) + 442 724 6228
-  const form = document.getElementById('rsvp');
-  const nameIn = document.getElementById('rsvp-name');
-  const seatsIn = document.getElementById('rsvp-seats');
-  const err = document.getElementById('rsvp-err');
-  if (guest) nameIn.value = guest;
-  if (seats >= 1 && seats <= 10) seatsIn.value = String(seats);
-  const clearErr = el => { el.classList.remove('invalid'); err.classList.remove('on'); };
-  nameIn.addEventListener('input', () => clearErr(nameIn));
-  seatsIn.addEventListener('change', () => clearErr(seatsIn));
-
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const nombre = nameIn.value.trim().replace(/\s+/g, ' ');
-    const asistentes = seatsIn.value;
-    const bad = !nombre ? nameIn : !asistentes ? seatsIn : null;
-    if (bad) {
-      bad.classList.add('invalid');
-      err.textContent = !nombre ? 'Por favor escribe el nombre de los invitados.' : 'Por favor elige cuántos asisten.';
-      err.classList.add('on');
-      bad.focus();
-      return;
-    }
-    clearErr(nameIn); clearErr(seatsIn);
-    const msg = `¡Hola! Confirmo asistencia para los XV de Renata León el 06 de Febrero 2027. Nombre: ${nombre}, Asistentes: ${asistentes}. ¡Ahí nos vemos!`;
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-    const win = window.open(url, '_blank');
-    if (win) win.opener = null; else location.href = url;
-  });
+  const waBtn = document.getElementById('wa-btn');
+  if (waBtn) {
+    const text = guest
+      ? `¡Hola! Confirmo mi asistencia para los XV de Renata León el 06 de Febrero 2027 (${guest}). ¡Ahí nos vemos!`
+      : `¡Hola! Confirmo mi asistencia para los XV de Renata León el 06 de Febrero 2027. ¡Ahí nos vemos!`;
+    waBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+  }
 
   // Cuenta regresiva
-  const target = new Date('2027-02-06T00:00:00-06:00').getTime();
+  const target = new Date('2027-02-06T17:30:00-06:00').getTime();
   const cd = { d: '[data-cd="d"]', h: '[data-cd="h"]', m: '[data-cd="m"]', s: '[data-cd="s"]' };
   Object.keys(cd).forEach(key => cd[key] = document.querySelector(cd[key]));
   const pad = n => String(n).padStart(2, '0');
